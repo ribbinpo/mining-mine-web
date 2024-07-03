@@ -4,6 +4,7 @@ import type {
   IGetTokenPriceDetailRequest,
   IGetTokenPriceAllResponse,
   IGetTokenPriceDetailResponse,
+  Currency,
 } from "@/types/token.d";
 import { encodeQuery } from "@/utils/param.util";
 
@@ -11,7 +12,9 @@ const getTokenPriceAll = async (
   getTokenPriceAllRequest: IGetTokenPriceAllRequest
 ) => {
   const query = encodeQuery(getTokenPriceAllRequest);
-  const response = await Axios.get<IGetTokenPriceAllResponse>(`/api/price-token?${query}`);
+  const response = await Axios.get<IGetTokenPriceAllResponse>(
+    `/api/price-token?${query}`
+  );
   return response;
 };
 
@@ -25,4 +28,17 @@ const getTokenDetail = async (
   return response;
 };
 
-export { getTokenPriceAll, getTokenDetail };
+const getCurrentPrices = async () => {
+  const currency: Array<Currency> = ["USDT", "BTC", "ETH"];
+  const list = currency.map(async (cur) => {
+    const res = await getTokenDetail({
+      currency: cur,
+      fiatAmounts: 1000,
+      type: "BUY",
+    });
+    return { label: cur, ...res.data };
+  });
+  return await Promise.all(list);
+};
+
+export { getTokenPriceAll, getTokenDetail, getCurrentPrices };

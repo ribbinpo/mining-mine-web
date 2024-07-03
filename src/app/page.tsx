@@ -1,7 +1,9 @@
+import TokenCardList from "@/components/tokens/TokenCardList";
+
 export default function Home() {
   return (
-    <main className="flex min-h-screen flex-col items-center justify-between p-24">
-      <div>Mining Mine Bot</div>
+    <main className="flex min-h-screen flex-col justify-between px-48 py-10">
+      <TokenCardList />
     </main>
   );
 }
