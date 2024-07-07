@@ -41,4 +41,8 @@ const getCurrentPrices = async () => {
   return await Promise.all(list);
 };
 
-export { getTokenPriceAll, getTokenDetail, getCurrentPrices };
+export {
+  getTokenPriceAll,
+  getTokenDetail,
+  getCurrentPrices,
+};
