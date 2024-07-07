@@ -4,6 +4,7 @@ import "./globals.css";
 
 import { NextUIProvider } from "@nextui-org/react";
 import NavbarLayout from "@/components/layouts/Navbar";
+import ReactQueryWrapper from "@/providers/ReactQueryProvider";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -20,10 +21,12 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={inter.className}>
-        <NextUIProvider>
-          <NavbarLayout />
-          {children}
-        </NextUIProvider>
+        <ReactQueryWrapper>
+          <NextUIProvider>
+            <NavbarLayout />
+            {children}
+          </NextUIProvider>
+        </ReactQueryWrapper>
       </body>
     </html>
   );
